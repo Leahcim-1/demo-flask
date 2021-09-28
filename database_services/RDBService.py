@@ -52,6 +52,8 @@ class RDBService:
         conn = RDBService._get_db_connection()
         cur = conn.cursor()
 
+
+
         sql = "select * from " + db_schema + "." + table_name + " where " + \
             column_name + " like " + "'" + value_prefix + "%'"
         print("SQL Statement = " + cur.mogrify(sql, None))

@@ -20,6 +20,14 @@ def hello_world():
     return '<u>Hello World!</u>'
 
 
+@app.route('/users-resources/<user_id>')
+def get_user_by_user_id(user_id):
+    user = UserResource.get_by_user_id(user_id)
+    if len(user) == 0:
+        Response(status=400)
+    return Response(json.dumps(user[0]), status=200, content_type="application/json")
+
+
 @app.route('/imdb/artists/<prefix>')
 def get_artists_by_prefix(prefix):
     res = IMDBArtistResource.get_by_name_prefix(prefix)
@@ -42,4 +50,4 @@ def get_by_prefix(db_schema, table_name, column_name, prefix):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5001)
